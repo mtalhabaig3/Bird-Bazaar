@@ -48,6 +48,12 @@ const NavigationBar = () => {
               </li>
 
               <li className="nav-item">
+                <Link to={"signUp"} className="nav-link" href="#">
+                  Sign Up
+                </Link>
+              </li>
+
+              <li className="nav-item">
                 <Link to={"cart"} className="nav-link" href="#">
                   Cart
                 </Link>
