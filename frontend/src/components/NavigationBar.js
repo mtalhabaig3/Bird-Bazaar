@@ -80,7 +80,7 @@ const NavigationBar = () => {
           </div>
         </div>
       </nav>
-      <div>
+      <div style={{ minHeight: "100vh" }}>
         <Outlet />
       </div>
       <div className="bg-dark row py-5">
