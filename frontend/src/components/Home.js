@@ -1,5 +1,6 @@
 import React from "react";
 import parrotImage from "../assets/imgs/parrot.JPG";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -16,9 +17,9 @@ const Home = () => {
                 lead-in to additional content. This content is a little bit
                 longer.
               </p>
-              <a href="#" class="btn btn-primary">
-                Go somewhere
-              </a>
+              <Link to={"products/2"} class="btn btn-primary">
+                View details
+              </Link>
             </div>
           </div>
         </div>
@@ -33,7 +34,7 @@ const Home = () => {
                 longer.
               </p>
               <a href="#" class="btn btn-primary">
-                Go somewhere
+                View details
               </a>
             </div>
           </div>
@@ -48,7 +49,7 @@ const Home = () => {
                 lead-in to additional content.
               </p>
               <a href="#" class="btn btn-primary">
-                Go somewhere
+                View details
               </a>
             </div>
           </div>
@@ -64,7 +65,7 @@ const Home = () => {
                 longer.
               </p>
               <a href="#" class="btn btn-primary">
-                Go somewhere
+                View details
               </a>
             </div>
           </div>
@@ -80,7 +81,7 @@ const Home = () => {
                 longer.
               </p>
               <a href="#" class="btn btn-primary">
-                Go somewhere
+                View details
               </a>
             </div>
           </div>
@@ -96,7 +97,7 @@ const Home = () => {
                 longer.
               </p>
               <a href="#" class="btn btn-primary">
-                Go somewhere
+                View details
               </a>
             </div>
           </div>
