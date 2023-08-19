@@ -84,7 +84,7 @@ const NavigationBar = () => {
         <Outlet />
       </div>
       <div className="bg-dark row py-5">
-        <div className="card text-bg-dark col-3">
+        <div className="card text-bg-dark border-dark col-3">
           <h5 className="card-header">Get to Know Us</h5>
           <div className="card-body">
             <p className="card-text">Carrers</p>
@@ -92,7 +92,7 @@ const NavigationBar = () => {
             <p className="card-text">About Amazon</p>
           </div>
         </div>
-        <div className="card text-bg-dark col-3">
+        <div className="card text-bg-dark border-dark col-3">
           <h5 className="card-header">Make Money with Us</h5>
           <div className="card-body">
             <p className="card-text">Sell products on Amazon</p>
@@ -100,7 +100,7 @@ const NavigationBar = () => {
             <p className="card-text">Sell apps on Amazon</p>
           </div>
         </div>
-        <div className="card text-bg-dark col-3">
+        <div className="card text-bg-dark border-dark col-3">
           <h5 className="card-header">Amazon Payment Products</h5>
           <div className="card-body">
             <p className="card-text">Amazon Business Card</p>
@@ -108,7 +108,7 @@ const NavigationBar = () => {
             <p className="card-text">Reload Your Balance</p>
           </div>
         </div>
-        <div className="card text-bg-dark col-3">
+        <div className="card text-bg-dark border-dark col-3">
           <h5 className="card-header">Let Us Help You</h5>
           <div className="card-body">
             <p className="card-text">Amazon and COVID-19</p>
