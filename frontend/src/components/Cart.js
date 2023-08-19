@@ -2,7 +2,12 @@ import React from "react";
 import parrotImage from "../assets/imgs/parrotUp.JPG";
 
 const products = [
-  { image: parrotImage, title: "parrot_1", description: "This is parrot 1" },
+  {
+    id: 1,
+    image: parrotImage,
+    title: "parrot_1",
+    description: "This is parrot 1",
+  },
   //   { image: parrotImage, title: "parrot_2", description: "This is parrot 2" },
 ];
 

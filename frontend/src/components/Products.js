@@ -3,12 +3,42 @@ import parrotImage from "../assets/imgs/parrotUp.JPG";
 import { Link } from "react-router-dom";
 
 const products = [
-  { image: parrotImage, title: "parrot_1", description: "This is parrot 1" },
-  { image: parrotImage, title: "parrot_2", description: "This is parrot 2" },
-  { image: parrotImage, title: "parrot_3", description: "This is parrot 3" },
-  { image: parrotImage, title: "parrot_4", description: "This is parrot 4" },
-  { image: parrotImage, title: "parrot_5", description: "This is parrot 5" },
-  { image: parrotImage, title: "parrot_6", description: "This is parrot 6" },
+  {
+    id: 1,
+    image: parrotImage,
+    title: "parrot_1",
+    description: "This is parrot 1",
+  },
+  {
+    id: 2,
+    image: parrotImage,
+    title: "parrot_2",
+    description: "This is parrot 2",
+  },
+  {
+    id: 3,
+    image: parrotImage,
+    title: "parrot_3",
+    description: "This is parrot 3",
+  },
+  {
+    id: 4,
+    image: parrotImage,
+    title: "parrot_4",
+    description: "This is parrot 4",
+  },
+  {
+    id: 5,
+    image: parrotImage,
+    title: "parrot_5",
+    description: "This is parrot 5",
+  },
+  {
+    id: 6,
+    image: parrotImage,
+    title: "parrot_6",
+    description: "This is parrot 6",
+  },
 ];
 
 const Products = () => {

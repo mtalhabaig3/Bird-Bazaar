@@ -3,9 +3,24 @@ import parrotImage from "../assets/imgs/parrot.JPG";
 import { Link } from "react-router-dom";
 
 const featuredProducts = [
-  { image: parrotImage, title: "parrot_1", description: "This is parrot 1" },
-  { image: parrotImage, title: "parrot_2", description: "This is parrot 2" },
-  { image: parrotImage, title: "parrot_3", description: "This is parrot 3" },
+  {
+    id: 1,
+    image: parrotImage,
+    title: "parrot_1",
+    description: "This is parrot 1",
+  },
+  {
+    id: 2,
+    image: parrotImage,
+    title: "parrot_2",
+    description: "This is parrot 2",
+  },
+  {
+    id: 3,
+    image: parrotImage,
+    title: "parrot_3",
+    description: "This is parrot 3",
+  },
 ];
 
 const categories = [
