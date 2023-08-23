@@ -1,15 +1,25 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-
+var jwt = require("jsonwebtoken");
 const User = require("./db/models/User");
 const Product = require("./db/models/Product");
 const app = express();
+
 const port = 5000;
 const saltRounds = 10;
+const jwt_secret = "secret";
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+const createJWT = (user) => {
+  const token = jwt.sign(
+    { user_id: user._id, username: user.name },
+    jwt_secret,
+    { expiresIn: "30d" }
+  );
+};
 
 app.post("/api/v1/login", async (req, res) => {
   const { email, password } = req.body;
@@ -18,7 +28,8 @@ app.post("/api/v1/login", async (req, res) => {
   if (user) {
     const isMatch = await bcrypt.compare(password, user.password);
     if (isMatch) {
-      res.status(200).json({ msg: "Login Successful!" });
+      createJWT(user);
+      res.status(200).json({ msg: "Login Successful!", token: token });
     } else {
       res.status(401).json({ msg: "wrong credentials!" });
     }
@@ -30,8 +41,9 @@ app.post("/api/v1/register", async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   try {
-    await User.create({ ...req.body, password: hashedPassword });
-    res.status(200).json({ msg: "user created!" });
+    const user = await User.create({ ...req.body, password: hashedPassword });
+    createJWT(user);
+    res.status(200).json({ msg: "user created!", token: token });
   } catch (error) {
     console.error(error);
   }
