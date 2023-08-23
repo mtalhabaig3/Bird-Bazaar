@@ -52,7 +52,7 @@ const SignUp = () => {
           Check me out
         </label>
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" onSubmit={handleSubmit} className="btn btn-primary">
         Sign Up
       </button>
     </form>
