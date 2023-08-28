@@ -88,6 +88,41 @@ app.get("/api/v1/getProducts/:id", authenticate_JWT, async (req, res) => {
   res.status(200).send(product);
 });
 
+app.post("/api/v1/cart", authenticate_JWT, async (req, res) => {
+  const { user_id } = req.user;
+  const { productId, quantity } = req.body;
+  const user = await User.findById(user_id);
+  console.log(user);
+
+  const cartItemIndex = user?.cart.findIndex(
+    (item) => item.productId.toString() === productId
+  );
+
+  if (cartItemIndex > -1) {
+    user.cart[cartItemIndex].quantity += quantity;
+  } else {
+    user.cart.push({ productId, quantity });
+  }
+
+  await user.save();
+
+  res.status(200).send(user.cart);
+});
+
+app.get("/api/v1/cart", authenticate_JWT, async (req, res) => {
+  try {
+    const { user_id } = req.user;
+    const user = await User.findById(user_id);
+    console.log(user);
+
+    await user.populate("cart.productId");
+
+    res.status(200).send(user.cart);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 async function main() {
   return await mongoose
     .connect(
