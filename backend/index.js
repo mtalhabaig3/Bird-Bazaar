@@ -5,6 +5,7 @@ var jwt = require("jsonwebtoken");
 const User = require("./db/models/User");
 const Product = require("./db/models/Product");
 const app = express();
+var cors = require("cors");
 
 const port = 5000;
 const saltRounds = 10;
@@ -12,6 +13,7 @@ const jwt_secret = "secret";
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors());
 
 const createJWT = (user) => {
   const token = jwt.sign(
@@ -75,7 +77,7 @@ app.post("/api/v1/register", async (req, res) => {
   }
 });
 
-app.get("/api/v1/getProducts", authenticate_JWT, async (req, res) => {
+app.get("/api/v1/getProducts", async (req, res) => {
   const products = await Product.find({});
 
   res.status(200).send(products);
