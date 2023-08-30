@@ -68,9 +68,11 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const getProducts = async () => {
+      const token = localStorage.getItem("token");
       try {
         const items = await axios.get(
-          "http://localhost:5000/api/v1/getProducts"
+          "http://localhost:5000/api/v1/getProducts",
+          { headers: { Authorization: `Bearer ${token}` } }
         );
         setProducts(items.data);
         console.log(items);

@@ -77,7 +77,7 @@ app.post("/api/v1/register", async (req, res) => {
   }
 });
 
-app.get("/api/v1/getProducts", async (req, res) => {
+app.get("/api/v1/getProducts", authenticate_JWT, async (req, res) => {
   const products = await Product.find({});
 
   res.status(200).send(products);
