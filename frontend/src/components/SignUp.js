@@ -1,20 +1,35 @@
 import React, { useState } from "react";
 
 const SignUp = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "email") {
-      setEmail(value);
-    } else {
-      setPassword(value);
-    }
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
+
+  const handleSubmit = () => {};
+
   return (
     <form className="container my-5">
+      <div className="mb-3">
+        <label for="exampleInputEmail1" className="form-label">
+          Name
+        </label>
+        <input
+          name="name"
+          type="name"
+          className="form-control"
+          id="exampleInputEmail1"
+          value={formData.name}
+          onChange={handleChange}
+        />
+      </div>
       <div className="mb-3">
         <label for="exampleInputEmail1" className="form-label">
           Email address
@@ -25,7 +40,7 @@ const SignUp = () => {
           className="form-control"
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
-          value={email}
+          value={formData.email}
           onChange={handleChange}
         />
       </div>
@@ -38,21 +53,12 @@ const SignUp = () => {
           type="password"
           className="form-control"
           id="exampleInputPassword1"
-          value={password}
+          value={formData.password}
           onChange={handleChange}
         />
       </div>
-      <div className="mb-3 form-check">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="exampleCheck1"
-        />
-        <label className="form-check-label" for="exampleCheck1">
-          Check me out
-        </label>
-      </div>
-      <button type="submit" onSubmit={handleSubmit} className="btn btn-primary">
+
+      <button type="submit" className="btn btn-primary">
         Sign Up
       </button>
     </form>

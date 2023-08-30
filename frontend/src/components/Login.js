@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "email") {
-      setEmail(value);
-    } else {
-      setPassword(value);
-    }
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   return (
@@ -26,7 +24,7 @@ const Login = () => {
           className="form-control"
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
-          value={email}
+          value={formData.email}
           onChange={handleChange}
         />
       </div>
@@ -39,20 +37,11 @@ const Login = () => {
           type="password"
           className="form-control"
           id="exampleInputPassword1"
-          value={password}
+          value={formData.password}
           onChange={handleChange}
         />
       </div>
-      <div className="mb-3 form-check">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="exampleCheck1"
-        />
-        <label className="form-check-label" for="exampleCheck1">
-          Check me out
-        </label>
-      </div>
+
       <button type="submit" className="btn btn-primary">
         Login
       </button>
