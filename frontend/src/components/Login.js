@@ -1,6 +1,10 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -12,8 +16,24 @@ const Login = () => {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const data = await axios.post("http://localhost:5000/api/v1/login", {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+      const token = data.data.token;
+      localStorage.setItem("token", token);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <form className="container my-5">
+    <form className="container my-5" onSubmit={(e) => handleSubmit(e)}>
       <div className="mb-3">
         <label for="exampleInputEmail1" className="form-label">
           Email address
@@ -22,7 +42,7 @@ const Login = () => {
           name="email"
           type="email"
           className="form-control"
-          id="exampleInputEmail1"
+          id="exampleInputName1"
           aria-describedby="emailHelp"
           value={formData.email}
           onChange={handleChange}
