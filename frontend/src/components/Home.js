@@ -42,28 +42,6 @@ import axios from "axios";
 //   },
 // ];
 
-const renderFeatured = (products) => {
-  return products.map((product) => {
-    return (
-      <div>
-        <div className="col mb-5">
-          <div className="card h-100">
-            <img src={parrotImage} className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">{product.title}</h5>
-              <p className="card-text">{product.description}</p>
-              <p className="card-text">${product.price}</p>
-              <Link to={"products/2"} class="btn btn-primary">
-                View details
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  });
-};
-
 const Home = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -84,6 +62,29 @@ const Home = () => {
 
     getProducts();
   }, []);
+
+  const renderFeatured = (products) => {
+    return products.map((product) => {
+      return (
+        <div>
+          <div className="col mb-5">
+            <div className="card h-100">
+              <img src={parrotImage} className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">{product.title}</h5>
+                <p className="card-text">{product.description}</p>
+                <p className="card-text">${product.price}</p>
+                <Link to={"products/2"} class="btn btn-primary">
+                  View details
+                </Link>
+                <button className="btn btn-primary mx-2"> Add to cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
   return (
     <div className="container mt-5">
       <h1>Featured</h1>
