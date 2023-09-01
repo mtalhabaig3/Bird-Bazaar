@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import parrotImage from "../assets/imgs/parrotUp.JPG";
-
-const products = [
-  {
-    id: 1,
-    image: parrotImage,
-    title: "parrot_1",
-    description: "This is parrot 1",
-  },
-  //   { image: parrotImage, title: "parrot_2", description: "This is parrot 2" },
-];
+import axios from "axios";
 
 const Cart = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const token = localStorage.getItem("token");
+      try {
+        const items = await axios.get("http://localhost:5000/api/v1/cart", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setProducts(items.data);
+        console.log(items);
+        console.log("Successfully received cart!");
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getProducts();
+  }, []);
+
   const renderProducts = () => {
     return products.map((product) => {
       return (
@@ -19,15 +30,16 @@ const Cart = () => {
           <div className="row">
             <div className="col-md-4">
               <img
-                src={product.image}
+                src={parrotImage}
                 className="img-fluid rounded-start"
                 alt="..."
               />
             </div>
             <div className="col-md-8">
               <div className="card-body">
-                <h5 className="card-title">{product.title}</h5>
-                <p className="card-text">{product.description}</p>
+                <h5 className="card-title">{product.productId.title}</h5>
+                <p className="card-text">${product.productId.price}</p>
+                <p className="card-text">quantity: {product.quantity}</p>
               </div>
             </div>
           </div>
