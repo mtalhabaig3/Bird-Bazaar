@@ -23,6 +23,15 @@ const Cart = () => {
     getProducts();
   }, []);
 
+  const calculatePrice = () => {
+    let totalPrice = 0;
+    products.forEach((product) => {
+      totalPrice += product.productId.price * product.quantity;
+    });
+
+    return totalPrice;
+  };
+
   const renderProducts = () => {
     return products.map((product) => {
       return (
@@ -52,7 +61,7 @@ const Cart = () => {
       {renderProducts()}
       <div class="card" style={{ width: "18rem" }}>
         <div class="card-body">
-          <h5 class="card-title">Sub Total: $100</h5>
+          <h5 class="card-title">Sub Total: ${calculatePrice()}</h5>
           <p class="card-text">
             With supporting text below as a natural lead-in to additional
             content.
