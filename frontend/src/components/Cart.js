@@ -5,21 +5,21 @@ import axios from "axios";
 const Cart = () => {
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const getProducts = async () => {
-      const token = localStorage.getItem("token");
-      try {
-        const items = await axios.get("http://localhost:5000/api/v1/cart", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setProducts(items.data);
-        console.log(items);
-        console.log("Successfully received cart!");
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const getProducts = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const items = await axios.get("http://localhost:5000/api/v1/cart", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log(items.data);
+      setProducts(items.data);
+      console.log("Successfully received cart!");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  useEffect(() => {
     getProducts();
   }, []);
 
@@ -30,6 +30,26 @@ const Cart = () => {
     });
 
     return totalPrice;
+  };
+
+  const handleRemove = async (product_id) => {
+    const token = localStorage.getItem("token");
+    try {
+      const data = await axios.delete(
+        `http://localhost:5000/api/v1/cart/${product_id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const newProducts = products.filter(
+        (product) => product._id != product_id
+      );
+      setProducts(newProducts);
+      console.log(newProducts);
+      console.log("delete successful!");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const renderProducts = () => {
@@ -49,6 +69,12 @@ const Cart = () => {
                 <h5 className="card-title">{product.productId.title}</h5>
                 <p className="card-text">${product.productId.price}</p>
                 <p className="card-text">quantity: {product.quantity}</p>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => handleRemove(product._id)}
+                >
+                  Remove from cart
+                </button>
               </div>
             </div>
           </div>
