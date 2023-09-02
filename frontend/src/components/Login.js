@@ -20,7 +20,6 @@ const Login = () => {
     event.preventDefault();
     try {
       const data = await axios.post("http://localhost:5000/api/v1/login", {
-        name: formData.name,
         email: formData.email,
         password: formData.password,
       });

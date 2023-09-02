@@ -1,6 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
   return (
     <div className="container mt-5">
       <div className="row">
@@ -39,6 +46,9 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
+      <button className="btn btn-primary mt-5" onClick={handleLogOut}>
+        Log Out
+      </button>
     </div>
   );
 };
