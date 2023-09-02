@@ -3,6 +3,18 @@ import parrotImage from "../assets/imgs/parrot.JPG";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import CartModal from "./CartModal";
+import Modal from "react-modal";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    // right: "auto",
+    // bottom: "auto",
+    // marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -61,8 +73,6 @@ const Home = () => {
                 </Link>
                 <button
                   className="btn btn-primary mx-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
                   onClick={() => {
                     handleModal(product._id);
                   }}
@@ -78,7 +88,19 @@ const Home = () => {
   };
   return (
     <>
-      <CartModal />
+      <Modal
+        isOpen={showModal}
+        onRequestClose={() => setShowModal(false)}
+        contentLabel="Example Modal"
+        style={customStyles}
+      >
+        <h2>Cart</h2>
+
+        <div>I am a modal</div>
+        <button className="btn btn-primary" onClick={() => setShowModal(false)}>
+          close
+        </button>
+      </Modal>
       <div className="container mt-5">
         <h1>Featured</h1>
         <div className="row row-cols-1 row-cols-md-3 g-4 ">
