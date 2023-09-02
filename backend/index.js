@@ -94,7 +94,6 @@ app.post("/api/v1/cart", authenticate_JWT, async (req, res) => {
   const { user_id } = req.user;
   const { productId, quantity } = req.body;
   const user = await User.findById(user_id);
-  console.log(user);
 
   const cartItemIndex = user?.cart.findIndex(
     (item) => item.productId.toString() === productId
@@ -115,11 +114,32 @@ app.get("/api/v1/cart", authenticate_JWT, async (req, res) => {
   try {
     const { user_id } = req.user;
     const user = await User.findById(user_id);
-    console.log(user);
 
     await user.populate("cart.productId");
 
     res.status(200).send(user.cart);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.delete("/api/v1/cart/:id", authenticate_JWT, async (req, res) => {
+  try {
+    const { user_id } = req.user;
+    const { id } = req.params;
+    const user = await User.findById(user_id);
+
+    const cartItemIndex = user?.cart.findIndex(
+      (item) => item._id.toString() === id
+    );
+
+    if (cartItemIndex > -1) {
+      user.cart.splice(cartItemIndex, 1);
+      await user.save();
+      res.status(200).json({ msg: "item removed" });
+    } else {
+      res.status(400).json({ msg: "No item with this id" });
+    }
   } catch (error) {
     console.error(error);
   }
