@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import parrotImage from "../assets/imgs/parrotUp.JPG";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import CartModal from "./CartModal";
 import Modal from "react-modal";
 
 const customStyles = {
@@ -74,8 +73,6 @@ const Products = () => {
                 </Link>
                 <button
                   className="btn btn-primary mx-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
                   onClick={() => {
                     handleModal(product._id);
                   }}

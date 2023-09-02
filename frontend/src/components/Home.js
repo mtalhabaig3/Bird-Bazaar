@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import parrotImage from "../assets/imgs/parrot.JPG";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import CartModal from "./CartModal";
 import Modal from "react-modal";
 
 const customStyles = {
