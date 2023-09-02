@@ -2,9 +2,24 @@ import React, { useEffect, useState } from "react";
 import parrotImage from "../assets/imgs/parrotUp.JPG";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import CartModal from "./CartModal";
+import Modal from "react-modal";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    // right: "auto",
+    // bottom: "auto",
+    // marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     const getProducts = async () => {
       const token = localStorage.getItem("token");
@@ -24,6 +39,25 @@ const Products = () => {
     getProducts();
   }, []);
 
+  const handleModal = async (productId) => {
+    const token = localStorage.getItem("token");
+    try {
+      const data = await axios.post(
+        "http://localhost:5000/api/v1/cart",
+        {
+          productId: productId,
+          quantity: 1,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log("Added to cart");
+      console.log(data.data);
+      setShowModal(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const renderFeatured = () => {
     return products.map((product) => {
       return (
@@ -38,7 +72,16 @@ const Products = () => {
                 <Link to={"products/2"} class="btn btn-primary">
                   View details
                 </Link>
-                <button className="btn btn-primary mx-2"> Add to cart</button>
+                <button
+                  className="btn btn-primary mx-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop"
+                  onClick={() => {
+                    handleModal(product._id);
+                  }}
+                >
+                  Add to cart
+                </button>
               </div>
             </div>
           </div>
@@ -47,12 +90,27 @@ const Products = () => {
     });
   };
   return (
-    <div className="container mt-5">
-      <h1>All Products</h1>
-      <div className="row row-cols-1 row-cols-md-3 g-4 ">
-        {renderFeatured()}
+    <>
+      <Modal
+        isOpen={showModal}
+        onRequestClose={() => setShowModal(false)}
+        contentLabel="Example Modal"
+        style={customStyles}
+      >
+        <h2>Cart</h2>
+
+        <div>I am a modal</div>
+        <button className="btn btn-primary" onClick={() => setShowModal(false)}>
+          close
+        </button>
+      </Modal>
+      <div className="container mt-5">
+        <h1>All Products</h1>
+        <div className="row row-cols-1 row-cols-md-3 g-4 ">
+          {renderFeatured()}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
