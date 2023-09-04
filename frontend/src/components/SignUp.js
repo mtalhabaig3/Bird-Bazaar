@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addUserInfo } from "../redux/userSlice";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -24,6 +27,7 @@ const SignUp = () => {
         email: formData.email,
         password: formData.password,
       });
+      dispatch(addUserInfo({ name: data.data.name, email: formData.email }));
       const token = data.data.token;
       localStorage.setItem("token", token);
       navigate("/");

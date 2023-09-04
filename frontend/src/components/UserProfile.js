@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
+  const user = useSelector((state) => state.user.value);
+
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -25,11 +28,12 @@ const UserProfile = () => {
         <div className="col-sm-4">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Your Account</h5>
-              <p className="card-text">
+              <h5 className="card-title">{user.name}'s Account</h5>
+              <p className="card-text">email: {user.email}</p>
+              {/* <p className="card-text">
                 With supporting text below as a natural lead-in to additional
                 content.
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
