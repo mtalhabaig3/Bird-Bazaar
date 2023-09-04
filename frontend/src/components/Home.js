@@ -67,7 +67,7 @@ const Home = () => {
                 <h5 className="card-title">{product.title}</h5>
                 <p className="card-text">{product.description}</p>
                 <p className="card-text">${product.price}</p>
-                <Link to={"products/2"} class="btn btn-primary">
+                <Link to={`/products/${product._id}`} class="btn btn-primary">
                   View details
                 </Link>
                 <button
