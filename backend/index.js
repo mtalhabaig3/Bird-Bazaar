@@ -54,7 +54,9 @@ app.post("/api/v1/login", async (req, res) => {
       const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
         const token = createJWT(user);
-        res.status(200).json({ msg: "Login Successful!", token });
+        res
+          .status(200)
+          .json({ msg: "Login Successful!", name: user.name, token });
       } else {
         res.status(401).json({ msg: "wrong credentials!" });
       }
