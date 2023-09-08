@@ -38,7 +38,8 @@ const SignUp = () => {
 
   return (
     <form className="container my-5" onSubmit={(e) => handleSubmit(e)}>
-      <div className="mb-3">
+      <h1>Sign Up</h1>
+      <div className="mb-3 mt-5">
         <label for="exampleInputEmail1" className="form-label">
           Name
         </label>

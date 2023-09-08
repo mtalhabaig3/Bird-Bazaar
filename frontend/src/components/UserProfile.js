@@ -13,6 +13,7 @@ const UserProfile = () => {
   };
   return (
     <div className="container mt-5">
+      <h1 className="mb-5">Account Info</h1>
       <div className="row">
         <div className="col-sm-4 mb-3 mb-sm-0">
           <div className="card ">
