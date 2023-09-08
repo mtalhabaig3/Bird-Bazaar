@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import parrotImage from "../assets/imgs/parrotUp.JPG";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -84,6 +85,7 @@ const Cart = () => {
   };
   return (
     <div className="container mt-5 row">
+      <h1>Cart</h1>
       {renderProducts()}
       <div class="card" style={{ width: "18rem" }}>
         <div class="card-body">
@@ -92,9 +94,9 @@ const Cart = () => {
             With supporting text below as a natural lead-in to additional
             content.
           </p>
-          <a href="#" class="btn btn-primary">
+          <Link to={"/address_payment"} class="btn btn-primary">
             Proceed to checkout
-          </a>
+          </Link>
         </div>
       </div>
     </div>
