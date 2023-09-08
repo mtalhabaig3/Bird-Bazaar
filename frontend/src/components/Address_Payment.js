@@ -16,18 +16,24 @@ const Address_Payment = () => {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     const data = await axios.post("http://localhost:5000/api/v1/login", {
-  //       email: formData.email,
-  //       password: formData.password,
-  //     });
-
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const data = await axios.post("http://localhost:5000/api/v1/orders", {
+        shippingAddress: {
+          address: formData.address,
+          city: formData.city,
+          zipCode: formData.zip,
+          country: formData.country,
+        },
+        paymentMethod: "card",
+        taxPrice: 10,
+        shippingPrice: 15,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className="container mt-5">
       <h1 className="mb-5">Address and Payment</h1>
