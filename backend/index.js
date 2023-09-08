@@ -4,8 +4,10 @@ const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 const User = require("./db/models/User");
 const Product = require("./db/models/Product");
+const Order = require("./db/models/Order");
 const app = express();
 var cors = require("cors");
+const { findById } = require("./db/models/Order");
 
 const port = 5000;
 const saltRounds = 10;
@@ -142,6 +144,39 @@ app.delete("/api/v1/cart/:id", authenticate_JWT, async (req, res) => {
     } else {
       res.status(400).json({ msg: "No item with this id" });
     }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.post("/api/v1/orders", authenticate_JWT, async (req, res) => {
+  try {
+    const { user_id } = req.user;
+    const user = await User.findById(user_id);
+    const cart = await user.populate("cart.productId");
+
+    console.log("cart: ", cart);
+    let totalPrice;
+
+    const orderItems = cart.cart.map((item) => ({
+      productId: item._id,
+      title: item.title,
+      quantity: item.quantity,
+      price: item.price,
+    }));
+
+    cart.cart.forEach((item) => {
+      totalPrice += item.price;
+    });
+
+    const newOrder = Order.create({
+      user: user_id,
+      orderItems,
+      ...req.body,
+      totalPrice,
+    });
+
+    res.status(200).json({ msg: "Order Placed" });
   } catch (error) {
     console.error(error);
   }
