@@ -156,18 +156,21 @@ app.post("/api/v1/orders", authenticate_JWT, async (req, res) => {
     const cart = await user.populate("cart.productId");
 
     console.log("cart: ", cart);
-    let totalPrice;
+    let totalPrice = 0;
 
     const orderItems = cart.cart.map((item) => ({
-      productId: item._id,
-      title: item.title,
+      product: item._id,
+      title: item.productId.title,
       quantity: item.quantity,
-      price: item.price,
+      price: item.productId.price,
     }));
+    console.log("Order Items: ", orderItems);
 
     cart.cart.forEach((item) => {
-      totalPrice += item.price;
+      totalPrice += item.productId.price;
     });
+
+    console.log("total price: ", totalPrice);
 
     const newOrder = Order.create({
       user: user_id,
@@ -177,6 +180,28 @@ app.post("/api/v1/orders", authenticate_JWT, async (req, res) => {
     });
 
     res.status(200).json({ msg: "Order Placed" });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.get("/api/v1/users/orders", authenticate_JWT, async (req, res) => {
+  try {
+    const { user_id } = req.user;
+    const orders = await Order.find({ user: user_id });
+
+    res.status(200).send(orders);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.get("/api/v1/orders/:orderId", authenticate_JWT, async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const order = await Order.findById(orderId);
+
+    res.status(200).send(order);
   } catch (error) {
     console.error(error);
   }
