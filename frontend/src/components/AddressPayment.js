@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const Address_Payment = () => {
+const AddressPayment = () => {
   const [formData, setFormData] = useState({
     address: "",
     address_2: "",
     city: "",
     country: "",
     zip: "",
+    payment: "",
   });
 
   const handleChange = (e) => {
@@ -18,18 +19,26 @@ const Address_Payment = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const token = localStorage.getItem("token");
     try {
-      const data = await axios.post("http://localhost:5000/api/v1/orders", {
-        shippingAddress: {
-          address: formData.address,
-          city: formData.city,
-          zipCode: formData.zip,
-          country: formData.country,
+      const data = await axios.post(
+        "http://localhost:5000/api/v1/orders",
+        {
+          shippingAddress: {
+            address: formData.address,
+            city: formData.city,
+            zipCode: formData.zip,
+            country: formData.country,
+          },
+          paymentMethod: formData.payment,
+          taxPrice: 10,
+          shippingPrice: 15,
+          totalPrice: 0,
         },
-        paymentMethod: "card",
-        taxPrice: 10,
-        shippingPrice: 15,
-      });
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
     } catch (error) {
       console.error(error);
     }
@@ -37,7 +46,7 @@ const Address_Payment = () => {
   return (
     <div className="container mt-5">
       <h1 className="mb-5">Address and Payment</h1>
-      <form className="row g-3">
+      <form className="row g-3" onSubmit={(e) => handleSubmit(e)}>
         <div className="col-12">
           <label for="inputAddress" className="form-label">
             Address
@@ -90,8 +99,10 @@ const Address_Payment = () => {
             value={formData.country}
             onChange={handleChange}
           >
-            <option selected>Choose...</option>
-            <option>...</option>
+            <option selected> ...</option>
+            <option>Pakistan</option>
+            <option>Afghanistan</option>
+            <option>USA</option>
           </select>
         </div>
         <div className="col-md-2">
@@ -107,6 +118,23 @@ const Address_Payment = () => {
             onChange={handleChange}
           />
         </div>
+        <div className="col-md-4">
+          <label for="inputState" className="form-label">
+            Payment Method
+          </label>
+          <select
+            name="payment"
+            id="inputcountry"
+            className="form-select"
+            value={formData.payment}
+            onChange={handleChange}
+          >
+            <option selected>...</option>
+            <option>Card</option>
+            <option>Cash On Delivery</option>
+            <option>Paypal</option>
+          </select>
+        </div>
 
         <div className="col-12">
           <button type="submit" className="btn btn-primary">
@@ -118,4 +146,4 @@ const Address_Payment = () => {
   );
 };
 
-export default Address_Payment;
+export default AddressPayment;

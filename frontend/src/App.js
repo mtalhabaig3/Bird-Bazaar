@@ -16,7 +16,7 @@ import SingleProduct from "./components/SingleProduct";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import UserProfile from "./components/UserProfile";
-import Address_Payment from "./components/Address_Payment";
+import AddressPayment from "./components/AddressPayment";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,7 +28,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="signUp" element={<SignUp />} />
       <Route path="userProfile" element={<UserProfile />} />
-      <Route path="address_payment" element={<Address_Payment />} />
+      <Route path="address_payment" element={<AddressPayment />} />
     </Route>
   )
 );
