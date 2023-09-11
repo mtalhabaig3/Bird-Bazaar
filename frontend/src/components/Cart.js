@@ -94,7 +94,7 @@ const Cart = () => {
             With supporting text below as a natural lead-in to additional
             content.
           </p>
-          <Link to={"/address_payment"} class="btn btn-primary">
+          <Link to={"/addressPayment"} class="btn btn-primary">
             Proceed to checkout
           </Link>
         </div>
