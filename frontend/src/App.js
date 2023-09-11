@@ -32,6 +32,10 @@ const router = createBrowserRouter(
       <Route path="userProfile" element={<UserProfile />} />
       <Route path="addressPayment" element={<AddressPayment />} />
       <Route path="orderDetails" element={<OrderDetails />} />
+      <Route
+        path="singleOrderDetails/:orderId"
+        element={<SingleOrderDetails />}
+      />
     </Route>
   )
 );

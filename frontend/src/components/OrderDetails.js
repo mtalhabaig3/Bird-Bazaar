@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const OrderDetails = () => {
   const [orders, setOrders] = useState([]);
@@ -30,9 +31,12 @@ const OrderDetails = () => {
           <h5 className="card-title">total items: {order.orderItems.length}</h5>
           <p className="card-text">address : {order.shippingAddress.address}</p>
           <p className="card-text">total price : ${order.totalPrice}</p>
-          <button className="btn btn-primary" onClick={{}}>
+          <Link
+            className="btn btn-primary"
+            to={`/singleOrderDetails/${order._id}`}
+          >
             View Details
-          </button>
+          </Link>
         </div>
         <div className="card-footer text-body-secondary">{order.createdAt}</div>
       </div>
