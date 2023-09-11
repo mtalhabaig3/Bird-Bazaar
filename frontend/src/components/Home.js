@@ -95,7 +95,7 @@ const Home = () => {
       >
         <h2>Cart</h2>
 
-        <div>I am a modal</div>
+        <div>Added to cart.</div>
         <button className="btn btn-primary" onClick={() => setShowModal(false)}>
           close
         </button>
