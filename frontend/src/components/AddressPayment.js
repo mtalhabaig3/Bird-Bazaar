@@ -1,6 +1,7 @@
 import axios from "axios";
 import Modal from "react-modal";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const customStyles = {
   content: {
@@ -14,6 +15,7 @@ const customStyles = {
 };
 
 const AddressPayment = () => {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     address: "",
@@ -67,14 +69,14 @@ const AddressPayment = () => {
         <h2>Orders</h2>
 
         <div>Order placed!</div>
-        <button className="btn btn-primary" onClick={() => setShowModal(false)}>
+        <button
+          className="btn btn-primary"
+          onClick={() => navigate("/orderDetails")}
+        >
           View Orders
         </button>
-        <button
-          className="btn btn-primary mx-5"
-          onClick={() => setShowModal(false)}
-        >
-          Go to home
+        <button className="btn btn-primary mx-5" onClick={() => navigate("/")}>
+          Go home
         </button>
       </Modal>
       <div className="container mt-5">
