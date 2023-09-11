@@ -17,6 +17,8 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import UserProfile from "./components/UserProfile";
 import AddressPayment from "./components/AddressPayment";
+import OrderDetails from "./components/OrderDetails";
+import SingleOrderDetails from "./components/SingleOrderDetails";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,7 +30,8 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="signUp" element={<SignUp />} />
       <Route path="userProfile" element={<UserProfile />} />
-      <Route path="address_payment" element={<AddressPayment />} />
+      <Route path="addressPayment" element={<AddressPayment />} />
+      <Route path="orderDetails" element={<OrderDetails />} />
     </Route>
   )
 );

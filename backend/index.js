@@ -188,7 +188,7 @@ app.post("/api/v1/orders", authenticate_JWT, async (req, res) => {
 app.get("/api/v1/users/orders", authenticate_JWT, async (req, res) => {
   try {
     const { user_id } = req.user;
-    const orders = await Order.find({ user: user_id });
+    const orders = await Order.find({ user: user_id }).sort({ createdAt: 1 });
 
     res.status(200).send(orders);
   } catch (error) {
