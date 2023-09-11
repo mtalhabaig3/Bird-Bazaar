@@ -1,7 +1,7 @@
 import axios from "axios";
 import Modal from "react-modal";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const customStyles = {
   content: {
@@ -69,15 +69,12 @@ const AddressPayment = () => {
         <h2>Orders</h2>
 
         <div>Order placed!</div>
-        <button
-          className="btn btn-primary"
-          onClick={() => navigate("/orderDetails")}
-        >
+        <Link className="btn btn-primary" to={"/orderDetails"}>
           View Orders
-        </button>
-        <button className="btn btn-primary mx-5" onClick={() => navigate("/")}>
+        </Link>
+        <Link className="btn btn-primary mx-5" to={"/"}>
           Go home
-        </button>
+        </Link>
       </Modal>
       <div className="container mt-5">
         <h1 className="mb-5">Address and Payment</h1>
